@@ -38,13 +38,20 @@ public class SwipeRefreshActivity extends AppCompatActivity {
     }
 
     private void initRefreshLayout() {
-        mSwipeRefreshLayout.setColorSchemeColors(Color.rgb(47, 223, 189));
+        //#DE474B
+        mSwipeRefreshLayout.setColorSchemeColors(getResources().getColor(R.color.red));
+        mSwipeRefreshLayout.setProgressViewOffset(true,400,600);
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 Toast.makeText(mContext, "下载刷新", Toast.LENGTH_SHORT).show();
                 refreshData();
-                mSwipeRefreshLayout.setRefreshing(false);
+                mSwipeRefreshLayout.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        mSwipeRefreshLayout.setRefreshing(false);
+                    }
+                },2000);
             }
         });
     }
